@@ -20,10 +20,4 @@ yarn add @decafhub/react
 
 ## Usage
 
-
 ## API / Props
-
-
-## License
-
-MIT © [alioguzhan](https://github.com/alioguzhan)
