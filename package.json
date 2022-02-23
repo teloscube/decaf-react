@@ -20,8 +20,8 @@
     "type": "git"
   },
   "homepage": "",
-  "license": "MIT",
-  "private": true,
+  "license": "BSD-3-Clause",
+  "private": false,
   "scripts": {
     "start": "microbundle --jsx React.createElement --watch",
     "build": "microbundle --jsx React.createElement",
