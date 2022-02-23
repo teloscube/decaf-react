@@ -1,0 +1,112 @@
+{
+  "name": "@decafhub/react",
+  "version": "0.0.1",
+  "keywords": [
+    "decafhub",
+    "react"
+  ],
+  "description": "A React library for Decaf Apps",
+  "source": "src/index.tsx",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "alioguzhan <aoguzhanyildiz@gmail.com>",
+  "repository": {
+    "url": "",
+    "type": "git"
+  },
+  "homepage": "",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "microbundle --jsx React.createElement --watch",
+    "build": "microbundle --jsx React.createElement",
+    "test": "jest --coverage",
+    "make:docs": "typedoc",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "dependencies": {
+    "@decafhub/decaf-client": "^0.0.5",
+    "@types/js-cookie": "^3.0.1",
+    "js-cookie": "^3.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.20",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "gh-pages": "^3.2.3",
+    "husky": "^7.0.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.4",
+    "microbundle": "^0.14.2",
+    "postcss": "^8.4.6",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.1",
+    "rollup": "^2.68.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "ts-jest": "^27.1.3",
+    "typedoc": "^0.22.12",
+    "typescript": "^4.5.5"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "./node_modules/.bin/prettier --write",
+      "./node_modules/.bin/eslint"
+    ]
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 120,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "standard-version": {
+    "tagPrefix": ""
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
