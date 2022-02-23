@@ -27,7 +27,8 @@
     "build": "microbundle --jsx React.createElement",
     "test": "jest --coverage",
     "make:docs": "typedoc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "standard-version"
   },
   "engines": {
     "node": ">=10",
@@ -83,6 +84,7 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
+    "standard-version": "^9.3.2",
     "ts-jest": "^27.1.3",
     "typedoc": "^0.22.12",
     "typescript": "^4.5.5"
