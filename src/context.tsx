@@ -1,6 +1,13 @@
 import { buildDecafClient, DecafClient } from '@decafhub/decaf-client';
-import Cookies from 'js-cookie';
 import React, { useContext } from 'react';
+
+// cookie getter
+export function getCookie(name: string) {
+  return document.cookie
+    .split(';')
+    .map((c) => c.trim().split('='))
+    .filter((c) => c[0] === name)[0]?.[1];
+}
 
 export interface DecafContextType {
   client: DecafClient;
@@ -22,7 +29,7 @@ export const useDecaf = () => useContext(DecafContext);
 
 export function getAuthenticationToken(): string | undefined {
   // Attempt to get the cookie value:
-  const cookie = Cookies.get('ember_simple_auth-session');
+  const cookie = getCookie('ember_simple_auth-session');
 
   // If no cookie, return nothing:
   if (!cookie) {
