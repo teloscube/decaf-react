@@ -1,5 +1,6 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import React from 'react';
+export declare function getCookie(name: string): string;
 export interface DecafContextType {
     client: DecafClient;
 }
