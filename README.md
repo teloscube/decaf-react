@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/@decafhub/react.svg)](https://www.npmjs.com/package/@decafhub/decaf-react)
 [![npm](https://img.shields.io/npm/dm/@decafhub/react.svg)](https://www.npmjs.com/package/@decafhub/decaf-react)
-![GitHub](https://img.shields.io/github/license/teloscube/decaf-client-commons-react)
+![GitHub](https://img.shields.io/github/license/teloscube/decaf-react)
 
 ## Install
 
