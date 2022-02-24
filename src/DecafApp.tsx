@@ -35,7 +35,7 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   if (client === undefined) {
-    window.location.href = `/webapps/waitress/production?next=${window.location.href}`;
+    window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
     return null;
   }
 
