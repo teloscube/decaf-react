@@ -36,10 +36,8 @@
   },
   "peerDependencies": {
     "react": ">=17",
-    "react-dom": ">=17"
-  },
-  "dependencies": {
-    "@decafhub/decaf-client": "^0.0.5"
+    "react-dom": ">=17",
+    "@decafhub/decaf-client": "~0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
