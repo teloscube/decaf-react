@@ -50,14 +50,3 @@ export function getAuthenticatedDecafClient(): DecafClient | undefined {
   // Check token, build client and return:
   return token ? buildDecafClient('', { token }) : undefined;
 }
-
-export function getAuthenticatedDecafClientOrRedirect(): DecafClient {
-  const client = getAuthenticatedDecafClient();
-
-  if (client === undefined) {
-    window.location.href = `/webapps/waitress/production?next=${window.location.href}`;
-    return undefined as unknown as DecafClient;
-  }
-
-  return client;
-}
