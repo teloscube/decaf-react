@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-interface ZendeskWidgetProps {
+export interface ZendeskWidgetProps {
   /** public zendesk key */
   zendeskKey: string;
   /** zendesk widget settings. see:

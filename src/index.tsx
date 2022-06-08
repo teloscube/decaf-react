@@ -1,4 +1,4 @@
-import ZendeskWidget from 'ZendeskWidget';
+import ZendeskWidget from './ZendeskWidget';
 import { useDecaf } from './context';
 import DecafApp from './DecafApp';
 import DecafSpinner from './DecafSpinner';
