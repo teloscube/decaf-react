@@ -1,8 +1,7 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import React, { useEffect } from 'react';
-import { Principal, PublicConfig } from 'types';
 import ZendeskWidget from 'ZendeskWidget';
-import { DecafContext, getAuthenticatedDecafClient } from './context';
+import { DecafContext, getAuthenticatedDecafClient, Principal, PublicConfig } from './context';
 import DecafSpinner from './DecafSpinner';
 
 export type DecafAppType = {
