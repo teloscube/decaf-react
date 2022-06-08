@@ -20,6 +20,7 @@ export default function DecafApp(props: DecafAppType) {
     if (client) {
       Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
         .then(([meResp, configResp]) => {
+          setClient(client);
           setMe(meResp.data);
           setPublicConfig(configResp.data);
           setLoading(false);
