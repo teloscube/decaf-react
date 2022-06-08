@@ -1,6 +1,7 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import React, { useEffect } from 'react';
 import { Principal, PublicConfig } from 'types';
+import ZendeskWidget from 'ZendeskWidget';
 import { DecafContext, getAuthenticatedDecafClient } from './context';
 import DecafSpinner from './DecafSpinner';
 
@@ -46,5 +47,28 @@ export default function DecafApp(props: DecafAppType) {
     return null;
   }
 
-  return <DecafContext.Provider value={{ client, me, publicConfig }}>{props.children}</DecafContext.Provider>;
+  return (
+    <DecafContext.Provider value={{ client, me, publicConfig }}>
+      {publicConfig.zendesk && (
+        <ZendeskWidget
+          zendeskKey={publicConfig.zendesk}
+          settings={{
+            contactForm: {
+              fields: [
+                {
+                  id: 'name',
+                  prefill: { '*': me.fullname },
+                },
+                {
+                  id: 'email',
+                  prefill: { '*': me.email },
+                },
+              ],
+            },
+          }}
+        />
+      )}
+      {props.children}
+    </DecafContext.Provider>
+  );
 }
