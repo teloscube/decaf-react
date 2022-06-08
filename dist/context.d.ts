@@ -9,5 +9,4 @@ export declare function DecafProvider({ children, value }: {
 export declare const useDecaf: () => DecafContextType;
 export declare function getAuthenticationToken(): string | undefined;
 export declare function getAuthenticatedDecafClient(): DecafClient | undefined;
-export declare function getAuthenticatedDecafClientOrRedirect(): DecafClient;
 //# sourceMappingURL=context.d.ts.map
