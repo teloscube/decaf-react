@@ -1,13 +1,12 @@
 import { buildDecafClient, DecafClient } from '@decafhub/decaf-client';
 import Cookies from 'js-cookie';
 import React, { useContext } from 'react';
-
-export interface DecafContextType {
-  client: DecafClient;
-}
+import { DecafContextType, Principal, PublicConfig } from 'types';
 
 export const DecafContext = React.createContext<DecafContextType>({
   client: undefined as unknown as DecafClient,
+  me: undefined as unknown as Principal,
+  publicConfig: undefined as unknown as PublicConfig,
 });
 
 export function DecafProvider({ children, value }: { children: JSX.Element; value: DecafContextType }) {
