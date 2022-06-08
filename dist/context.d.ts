@@ -1,8 +1,6 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import React from 'react';
-export interface DecafContextType {
-    client: DecafClient;
-}
+import { DecafContextType } from 'types';
 export declare const DecafContext: React.Context<DecafContextType>;
 export declare function DecafProvider({ children, value }: {
     children: JSX.Element;
