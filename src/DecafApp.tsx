@@ -20,12 +20,15 @@ export default function DecafApp(props: DecafAppType) {
     if (client) {
       Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
         .then(([meResp, configResp]) => {
+          console.log('meResp', meResp.data);
+          console.log('configResp', configResp.data);
           setClient(client);
           setMe(meResp.data);
           setPublicConfig(configResp.data);
           setLoading(false);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log('Failed to load user and public config: ', err.message);
           setClient(undefined);
           setMe(undefined);
           setPublicConfig(undefined);
@@ -42,6 +45,8 @@ export default function DecafApp(props: DecafAppType) {
   if (loading) {
     return <DecafSpinner title="Please Wait..." />;
   }
+
+  console.log('DecafApp:', client, me, publicConfig);
 
   if (client === undefined || me === undefined || publicConfig === undefined) {
     window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
