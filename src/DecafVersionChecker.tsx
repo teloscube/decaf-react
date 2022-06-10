@@ -79,7 +79,7 @@ const style = `
 
 export interface DecafVersionCheckerProps {
   currentVersion: string;
-  onNewVersion?: (newVersion: string) => void;
+  onNewVersion?: (versionOld: string, versionNew: string) => void;
 }
 
 export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
@@ -96,7 +96,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
         .then((data) => {
           setNewVersion(data.version);
           if (props.currentVersion !== data.version) {
-            props.onNewVersion?.(data.version);
+            props.onNewVersion?.(props.currentVersion, data.version);
           }
         })
         .catch(() => {
