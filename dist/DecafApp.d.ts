@@ -4,6 +4,8 @@ export interface DecafAppConfig {
     currentVersion?: string;
     /** callback when a new version is available */
     onNewVersion?: (versionOld: string, versionNew: string) => void;
+    /** PUBIC_URL of the host app. This is required to enable version checker. */
+    publicURL?: string;
 }
 export interface DecafAppType {
     children: JSX.Element;

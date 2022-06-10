@@ -80,6 +80,7 @@ const style = `
 export interface DecafVersionCheckerProps {
   currentVersion: string;
   onNewVersion?: (versionOld: string, versionNew: string) => void;
+  publicURL?: string;
 }
 
 export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
@@ -91,7 +92,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
       clearInterval(interval.current);
     }
     interval.current = window.setInterval(() => {
-      fetch(process.env.PUBLIC_URL + '/version.json?t=' + new Date().getTime())
+      fetch(props.publicURL + '/version.json?t=' + new Date().getTime())
         .then((res) => res.json())
         .then((data) => {
           setNewVersion(data.version);

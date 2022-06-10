@@ -10,6 +10,8 @@ export interface DecafAppConfig {
   currentVersion?: string;
   /** callback when a new version is available */
   onNewVersion?: (versionOld: string, versionNew: string) => void;
+  /** PUBIC_URL of the host app. This is required to enable version checker. */
+  publicURL?: string;
 }
 export interface DecafAppType {
   children: JSX.Element;
@@ -57,7 +59,11 @@ export default function DecafApp(props: DecafAppType) {
   return (
     <DecafContext.Provider value={{ client, me, publicConfig }}>
       {props.config?.currentVersion && (
-        <DecafVersionChecker currentVersion={props.config.currentVersion} onNewVersion={props.config.onNewVersion} />
+        <DecafVersionChecker
+          publicURL={props.config.publicURL}
+          currentVersion={props.config.currentVersion}
+          onNewVersion={props.config.onNewVersion}
+        />
       )}
       {publicConfig.zendesk && (
         <ZendeskWidget
