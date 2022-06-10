@@ -3,7 +3,7 @@ export interface DecafAppConfig {
     /** version of the application */
     currentVersion?: string;
     /** callback when a new version is available */
-    onNewVersion?: (newVersion: string) => void;
+    onNewVersion?: (versionOld: string, versionNew: string) => void;
 }
 export interface DecafAppType {
     children: JSX.Element;
