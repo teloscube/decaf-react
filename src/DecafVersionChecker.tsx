@@ -95,9 +95,11 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
       fetch(props.publicURL + '/version.json?t=' + new Date().getTime())
         .then((res) => res.json())
         .then((data) => {
-          setNewVersion(data.version);
-          if (props.currentVersion !== data.version) {
-            props.onNewVersion?.(props.currentVersion, data.version);
+          if (data.version) {
+            setNewVersion(data.version);
+            if (props.currentVersion !== data.version) {
+              props.onNewVersion?.(props.currentVersion, data.version);
+            }
           }
         })
         .catch(() => {
@@ -145,7 +147,12 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
               <button className="cancel-btn" onClick={() => setNewVersion(undefined)}>
                 Cancel
               </button>
-              <button className="reload-btn" onClick={window.location.reload}>
+              <button
+                className="reload-btn"
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
                 Reload
               </button>
             </div>
