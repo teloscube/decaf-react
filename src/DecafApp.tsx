@@ -10,8 +10,12 @@ export interface DecafAppConfig {
   currentVersion?: string;
   /** callback when a new version is available */
   onNewVersion?: (versionOld: string, versionNew: string) => void;
-  /** PUBIC_URL of the host app. This is required to enable version checker. */
-  publicURL?: string;
+  /** Base path of host app.
+   *
+   * This is usually PUBLIC_URL environment variable in React apps.
+   *
+   * Required to enable version checker. */
+  basePath?: string;
 }
 export interface DecafAppType {
   children: JSX.Element;
@@ -60,7 +64,7 @@ export default function DecafApp(props: DecafAppType) {
     <DecafContext.Provider value={{ client, me, publicConfig }}>
       {props.config?.currentVersion && (
         <DecafVersionChecker
-          publicURL={props.config.publicURL}
+          basePath={props.config.basePath}
           currentVersion={props.config.currentVersion}
           onNewVersion={props.config.onNewVersion}
         />
