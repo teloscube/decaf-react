@@ -91,7 +91,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
       clearInterval(interval.current);
     }
     interval.current = window.setInterval(() => {
-      fetch('/version.json?t=' + new Date().getTime())
+      fetch(process.env.PUBLIC_URL + '/version.json?t=' + new Date().getTime())
         .then((res) => res.json())
         .then((data) => {
           setNewVersion(data.version);
