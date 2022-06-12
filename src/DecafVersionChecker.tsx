@@ -145,7 +145,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
             </div>
             <div className="version-modal-footer">
               <button className="cancel-btn" onClick={() => setNewVersion(undefined)}>
-                Cancel
+                Let me finish my work first. I will reload later
               </button>
               <button
                 className="reload-btn"
