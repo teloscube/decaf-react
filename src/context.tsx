@@ -2,12 +2,10 @@ import { buildDecafClient, DecafClient } from '@decafhub/decaf-client';
 import Cookies from 'js-cookie';
 import React, { useContext } from 'react';
 
-export interface DecafContextType {
-  client: DecafClient;
-}
-
 export const DecafContext = React.createContext<DecafContextType>({
   client: undefined as unknown as DecafClient,
+  me: undefined as unknown as Principal,
+  publicConfig: undefined as unknown as PublicConfig,
 });
 
 export function DecafProvider({ children, value }: { children: JSX.Element; value: DecafContextType }) {
@@ -52,13 +50,55 @@ export function getAuthenticatedDecafClient(): DecafClient | undefined {
   return token ? buildDecafClient('', { token }) : undefined;
 }
 
-export function getAuthenticatedDecafClientOrRedirect(): DecafClient {
-  const client = getAuthenticatedDecafClient();
+export interface DecafContextType {
+  client: DecafClient;
+  me: Principal;
+  publicConfig: PublicConfig;
+}
+export interface Role {
+  code: string;
+  name: string;
+}
 
-  if (client === undefined) {
-    window.location.href = `/webapps/waitress/production?next=${window.location.href}`;
-    return undefined as unknown as DecafClient;
-  }
+export interface Team {
+  id: number;
+  name: string;
+}
 
-  return client;
+export interface Principal {
+  id: number;
+  guid: string;
+  username: string;
+  fullname: string;
+  first_name: string;
+  last_name: string;
+  email?: string;
+  mobile?: string;
+  active: boolean;
+  roles: Role[];
+  teams: Team[];
+  internal: boolean;
+  external: boolean;
+  privileged: boolean;
+}
+
+export interface PublicConfig {
+  /** company short name */
+  shortname: string;
+  /** company full name */
+  legalname: string;
+  /** company web site */
+  website: string;
+  /** logo url */
+  logo: string;
+  /** terms and conditions */
+  tnc: string;
+  /** zendeks code */
+  zendesk?: string;
+  /** google analytics code */
+  googleax?: string;
+  /** one-time password feature? */
+  otp: null;
+  /** password reset feature should be enabled or not */
+  pwdreset: true;
 }
