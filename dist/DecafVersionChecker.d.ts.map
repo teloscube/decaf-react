@@ -1,0 +1,1 @@
+{"version":3,"file":"DecafVersionChecker.d.ts","sourceRoot":"","sources":["../src/DecafVersionChecker.tsx"],"names":[],"mappings":";AA+EA,MAAM,WAAW,wBAAwB;IACvC,cAAc,EAAE,MAAM,CAAC;IACvB,YAAY,CAAC,EAAE,CAAC,UAAU,EAAE,MAAM,EAAE,UAAU,EAAE,MAAM,KAAK,IAAI,CAAC;IAChE,QAAQ,CAAC,EAAE,MAAM,CAAC;CACnB;AAED,MAAM,CAAC,OAAO,UAAU,mBAAmB,CAAC,KAAK,EAAE,wBAAwB,sBA8E1E"}
