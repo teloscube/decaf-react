@@ -27,6 +27,7 @@ export default function DecafApp(props: DecafAppType) {
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
+  const authInterval = React.useRef<number>();
 
   function cleanUp() {
     setClient(undefined);
@@ -36,19 +37,26 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   useEffect(() => {
-    const client = getAuthenticatedDecafClient();
-    if (client) {
-      Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
-        .then(([meResp, configResp]) => {
-          setClient(client);
-          setMe(meResp.data);
-          setPublicConfig(configResp.data);
-          setLoading(false);
-        })
-        .catch(cleanUp);
-    } else {
-      cleanUp();
+    function _() {
+      const client = getAuthenticatedDecafClient();
+      if (client) {
+        Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
+          .then(([meResp, configResp]) => {
+            setClient(client);
+            setMe(meResp.data);
+            setPublicConfig(configResp.data);
+            setLoading(false);
+          })
+          .catch(cleanUp);
+      } else {
+        cleanUp();
+      }
     }
+    _();
+    authInterval.current = window.setInterval(_, 1000 * 60);
+    return () => {
+      window.clearInterval(authInterval.current);
+    };
   }, []);
 
   if (loading) {
@@ -56,7 +64,7 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   if (client === undefined || me === undefined || publicConfig === undefined) {
-    window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
+    window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
     return null;
   }
 
