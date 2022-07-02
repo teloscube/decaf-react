@@ -37,27 +37,40 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   useEffect(() => {
-    function _() {
-      const client = getAuthenticatedDecafClient();
-      if (client) {
-        Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
-          .then(([meResp, configResp]) => {
-            setClient(client);
-            setMe(meResp.data);
-            setPublicConfig(configResp.data);
-            setLoading(false);
-          })
-          .catch(cleanUp);
-      } else {
-        cleanUp();
-      }
+    const client = getAuthenticatedDecafClient();
+    if (client) {
+      Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
+        .then(([meResp, configResp]) => {
+          setClient(client);
+          setMe(meResp.data);
+          setPublicConfig(configResp.data);
+          setLoading(false);
+        })
+        .catch(cleanUp);
+    } else {
+      cleanUp();
     }
-    _();
-    authInterval.current = window.setInterval(_, 1000 * 60);
+  }, []);
+
+  useEffect(() => {
+    // this is recurring auth check.
+    // Note, we are not building a new client here.
+    // we already know client and me are set.
+    // We just need to check if the credentials are still valid.
+    if (client) {
+      authInterval.current = window.setInterval(() => {
+        client.barista.get('/me/').catch((err) => {
+          // we are simply ignoring errors other than 401 and 403.
+          if (err.status === 401 || err.status === 403) {
+            cleanUp();
+          }
+        });
+      }, 1000 * 60);
+    }
     return () => {
       window.clearInterval(authInterval.current);
     };
-  }, []);
+  }, [client]);
 
   if (loading) {
     return <DecafSpinner title="Please Wait..." />;
