@@ -27,6 +27,7 @@
     "build": "microbundle --jsx React.createElement",
     "test": "jest --coverage",
     "make:docs": "typedoc",
+    "prepack": "yarn build",
     "prepare": "husky install",
     "release": "standard-version"
   },
