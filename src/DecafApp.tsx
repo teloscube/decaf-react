@@ -59,9 +59,9 @@ export default function DecafApp(props: DecafAppType) {
     // We just need to check if the credentials are still valid.
     if (client) {
       authInterval.current = window.setInterval(() => {
-        client.barista.get('/me/').catch((err) => {
+        client.barista.get('/me/').catch(({ response }) => {
           // we are simply ignoring errors other than 401 and 403.
-          if (err.status === 401 || err.status === 403) {
+          if (response.status === 401 || response.status === 403) {
             cleanUp();
           }
         });
