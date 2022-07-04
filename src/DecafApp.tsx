@@ -27,6 +27,7 @@ export default function DecafApp(props: DecafAppType) {
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
+  const authInterval = React.useRef<number>();
 
   function cleanUp() {
     setClient(undefined);
@@ -51,12 +52,32 @@ export default function DecafApp(props: DecafAppType) {
     }
   }, []);
 
+  useEffect(() => {
+    // this is recurring auth check.
+    // Note, we are not building a new client here.
+    // we already know client and me are set.
+    // We just need to check if the credentials are still valid.
+    if (client) {
+      authInterval.current = window.setInterval(() => {
+        client.barista.get('/me/').catch(({ response }) => {
+          // we are simply ignoring errors other than 401 and 403.
+          if (response.status === 401 || response.status === 403) {
+            cleanUp();
+          }
+        });
+      }, 1000 * 60);
+    }
+    return () => {
+      window.clearInterval(authInterval.current);
+    };
+  }, [client]);
+
   if (loading) {
     return <DecafSpinner title="Please Wait..." />;
   }
 
   if (client === undefined || me === undefined || publicConfig === undefined) {
-    window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
+    window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
     return null;
   }
 
