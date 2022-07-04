@@ -65,9 +65,9 @@ const style = `
 }
 
 .version-modal .cancel-btn {
-  background-color: #333;
+  background-color: #555;
   color: white;
-  border: none;
+  border: 1px solid #dfdfdf;
   padding: 10px;
   cursor: pointer;
 }
@@ -145,7 +145,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
             </div>
             <div className="version-modal-footer">
               <button className="cancel-btn" onClick={() => setNewVersion(undefined)}>
-                Let me finish my work first. I will reload later
+                Let me finish my work first. I will reload later.
               </button>
               <button
                 className="reload-btn"

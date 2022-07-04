@@ -1,6 +1,6 @@
 {
   "name": "@decafhub/decaf-react",
-  "version": "0.0.4",
+  "version": "0.0.5-SNAPSHOT",
   "keywords": [
     "decafhub",
     "react"
@@ -27,7 +27,7 @@
     "build": "microbundle --jsx React.createElement",
     "test": "jest --coverage",
     "make:docs": "typedoc",
-    "prepare": "husky install",
+    "prepare": "yarn build && husky install",
     "release": "standard-version"
   },
   "engines": {
