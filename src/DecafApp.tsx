@@ -1,8 +1,10 @@
 import { DecafClient } from '@decafhub/decaf-client';
+import { DecafAppController } from 'DecafAppController';
 import DecafVersionChecker from 'DecafVersionChecker';
+import { DecafWebappController } from 'DecafWebappController';
 import React, { useEffect } from 'react';
 import ZendeskWidget from 'ZendeskWidget';
-import { DecafContext, getAuthenticatedDecafClient, Principal, PublicConfig } from './context';
+import { DecafContext, Principal, PublicConfig } from './context';
 import DecafSpinner from './DecafSpinner';
 
 export interface DecafAppConfig {
@@ -20,6 +22,7 @@ export interface DecafAppConfig {
 export interface DecafAppType {
   children: JSX.Element;
   config?: DecafAppConfig;
+  controller?: DecafAppController;
 }
 
 export default function DecafApp(props: DecafAppType) {
@@ -27,7 +30,8 @@ export default function DecafApp(props: DecafAppType) {
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
-  const authInterval = React.useRef<number>();
+  const authInterval = React.useRef<NodeJS.Timer>();
+  const controller = props.controller || DecafWebappController;
 
   function cleanUp() {
     setClient(undefined);
@@ -37,7 +41,8 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   useEffect(() => {
-    const client = getAuthenticatedDecafClient();
+    const client = controller.getDecafClient();
+
     if (client) {
       Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
         .then(([meResp, configResp]) => {
@@ -50,7 +55,7 @@ export default function DecafApp(props: DecafAppType) {
     } else {
       cleanUp();
     }
-  }, []);
+  }, [controller]);
 
   useEffect(() => {
     // this is recurring auth check.
@@ -58,7 +63,7 @@ export default function DecafApp(props: DecafAppType) {
     // we already know client and me are set.
     // We just need to check if the credentials are still valid.
     if (client) {
-      authInterval.current = window.setInterval(() => {
+      authInterval.current = setInterval(() => {
         client.barista.get('/me/').catch(({ response }) => {
           // we are simply ignoring errors other than 401 and 403.
           if (response.status === 401 || response.status === 403) {
@@ -68,7 +73,8 @@ export default function DecafApp(props: DecafAppType) {
       }, 1000 * 60);
     }
     return () => {
-      window.clearInterval(authInterval.current);
+      // @ts-expect-error
+      clearInterval(authInterval.current);
     };
   }, [client]);
 
@@ -77,12 +83,11 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   if (client === undefined || me === undefined || publicConfig === undefined) {
-    window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
-    return null;
+    return controller.onSessionExpired();
   }
 
   return (
-    <DecafContext.Provider value={{ client, me, publicConfig }}>
+    <DecafContext.Provider value={{ client, me, publicConfig, controller }}>
       {props.config?.currentVersion && (
         <DecafVersionChecker
           basePath={props.config.basePath}
