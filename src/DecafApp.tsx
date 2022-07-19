@@ -20,7 +20,7 @@ export interface DecafAppConfig {
   basePath?: string;
 }
 export interface DecafAppType {
-  children: JSX.Element;
+  children: ReactNode;
   config?: DecafAppConfig;
   controller?: DecafAppController;
 }
