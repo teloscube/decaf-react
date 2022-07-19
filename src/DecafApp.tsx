@@ -79,7 +79,7 @@ export default function DecafApp(props: DecafAppType) {
   }, [client]);
 
   if (loading) {
-    return <DecafSpinner title="Please Wait..." />;
+    return typeof document !== 'undefined' ? <DecafSpinner title="Please Wait..." /> : null;
   }
 
   if (client === undefined || me === undefined || publicConfig === undefined) {
