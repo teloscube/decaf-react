@@ -1,11 +1,11 @@
 import { DecafClient } from '@decafhub/decaf-client';
-import { DecafAppController } from 'DecafAppController';
-import DecafVersionChecker from 'DecafVersionChecker';
-import { DecafWebappController } from 'DecafWebappController';
-import React, { useEffect } from 'react';
-import ZendeskWidget from 'ZendeskWidget';
+import React, { ReactNode, useEffect } from 'react';
 import { DecafContext, Principal, PublicConfig } from './context';
+import { DecafAppController } from './DecafAppController';
 import DecafSpinner from './DecafSpinner';
+import DecafVersionChecker from './DecafVersionChecker';
+import { DecafWebappController } from './DecafWebappController';
+import ZendeskWidget from './ZendeskWidget';
 
 export interface DecafAppConfig {
   /** version of the application */
