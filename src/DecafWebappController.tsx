@@ -1,5 +1,7 @@
 import { buildDecafClient } from '@decafhub/decaf-client';
+import React from 'react';
 import { DecafAppController } from './DecafAppController';
+import DecafSpinner from './DecafSpinner';
 
 export function getCookie(name: string): string | undefined {
   // Check if we are on Browser environment:
@@ -52,4 +54,10 @@ export const DecafWebappController: DecafAppController = {
     window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
     return null;
   },
+
+  onLoadingState(_loading: boolean) {
+    return null;
+  },
+
+  loadingComponent: <DecafSpinner title="Please Wait..." />,
 };

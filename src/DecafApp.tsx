@@ -2,7 +2,6 @@ import { DecafClient } from '@decafhub/decaf-client';
 import React, { ReactNode, useEffect } from 'react';
 import { DecafContext, Principal, PublicConfig } from './context';
 import { DecafAppController } from './DecafAppController';
-import DecafSpinner from './DecafSpinner';
 import DecafVersionChecker from './DecafVersionChecker';
 import { DecafWebappController } from './DecafWebappController';
 import ZendeskWidget from './ZendeskWidget';
@@ -39,6 +38,10 @@ export default function DecafApp(props: DecafAppType) {
     setPublicConfig(undefined);
     setLoading(false);
   }
+
+  useEffect(() => {
+    controller.onLoadingState(loading);
+  }, [controller, loading]);
 
   useEffect(() => {
     const client = controller.getDecafClient();
@@ -79,42 +82,40 @@ export default function DecafApp(props: DecafAppType) {
   }, [client]);
 
   if (loading) {
-    return typeof document !== 'undefined' ? <DecafSpinner title="Please Wait..." /> : null;
-  }
-
-  if (client === undefined || me === undefined || publicConfig === undefined) {
+    return <>{controller.loadingComponent}</>;
+  } else if (client === undefined || me === undefined || publicConfig === undefined) {
     return controller.onSessionExpired();
+  } else {
+    return (
+      <DecafContext.Provider value={{ client, me, publicConfig, controller }}>
+        {props.config?.currentVersion && (
+          <DecafVersionChecker
+            basePath={props.config.basePath}
+            currentVersion={props.config.currentVersion}
+            onNewVersion={props.config.onNewVersion}
+          />
+        )}
+        {publicConfig.zendesk && (
+          <ZendeskWidget
+            zendeskKey={publicConfig.zendesk}
+            settings={{
+              contactForm: {
+                fields: [
+                  {
+                    id: 'name',
+                    prefill: { '*': me.fullname },
+                  },
+                  {
+                    id: 'email',
+                    prefill: { '*': me.email },
+                  },
+                ],
+              },
+            }}
+          />
+        )}
+        {props.children}
+      </DecafContext.Provider>
+    );
   }
-
-  return (
-    <DecafContext.Provider value={{ client, me, publicConfig, controller }}>
-      {props.config?.currentVersion && (
-        <DecafVersionChecker
-          basePath={props.config.basePath}
-          currentVersion={props.config.currentVersion}
-          onNewVersion={props.config.onNewVersion}
-        />
-      )}
-      {publicConfig.zendesk && (
-        <ZendeskWidget
-          zendeskKey={publicConfig.zendesk}
-          settings={{
-            contactForm: {
-              fields: [
-                {
-                  id: 'name',
-                  prefill: { '*': me.fullname },
-                },
-                {
-                  id: 'email',
-                  prefill: { '*': me.email },
-                },
-              ],
-            },
-          }}
-        />
-      )}
-      {props.children}
-    </DecafContext.Provider>
-  );
 }

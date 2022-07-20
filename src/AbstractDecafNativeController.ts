@@ -1,4 +1,5 @@
 import { DecafClient } from '@decafhub/decaf-client';
+import { ReactNode } from 'react';
 import { DecafAppController } from './DecafAppController';
 
 export abstract class AbstractDecafNativeController implements DecafAppController {
@@ -13,4 +14,8 @@ export abstract class AbstractDecafNativeController implements DecafAppControlle
   }
 
   abstract onSessionExpired(): null;
+
+  abstract onLoadingState(loading: boolean): null;
+
+  abstract loadingComponent: ReactNode;
 }
