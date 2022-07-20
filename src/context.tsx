@@ -1,6 +1,6 @@
 import { DecafClient } from '@decafhub/decaf-client';
+import { DecafAppController } from 'DecafAppController';
 import React, { useContext } from 'react';
-import { DecafAppController } from './DecafAppController';
 
 export const DecafContext = React.createContext<DecafContextType>({
   client: undefined as unknown as DecafClient,

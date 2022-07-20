@@ -41,32 +41,23 @@ export function getAuthenticationToken(): string | undefined {
   }
 }
 
-export function getDecafWebappController(): DecafAppController {
-  // Attempt to get the authentication token:
-  const token = getAuthenticationToken();
+export const DecafWebappController: DecafAppController = {
+  getDecafClient() {
+    // Attempt to get the authentication token:
+    const token = getAuthenticationToken();
 
-  if (!token) {
-    throw new Error('No authentication token found. Can not build DECAF App controller.');
-  }
+    // Check token, build client and return:
+    return token ? buildDecafClient('', { token }) : undefined;
+  },
 
-  // Check token, build client and return:
-  const client = buildDecafClient('', { token });
+  onSessionExpired() {
+    window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
+    return null;
+  },
 
-  // Build controller and return:
-  return {
-    getDecafClient() {
-      return client;
-    },
+  onLoadingState(_loading: boolean) {
+    return null;
+  },
 
-    onSessionExpired() {
-      window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
-      return null;
-    },
-
-    onLoadingState(_loading: boolean) {
-      return null;
-    },
-
-    loadingComponent: <DecafSpinner title="Please Wait..." />,
-  };
-}
+  loadingComponent: <DecafSpinner title="Please Wait..." />,
+};

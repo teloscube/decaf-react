@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect } from 'react';
 import { DecafContext, Principal, PublicConfig } from './context';
 import { DecafAppController } from './DecafAppController';
 import DecafVersionChecker from './DecafVersionChecker';
-import { getDecafWebappController } from './DecafWebappController';
+import { DecafWebappController } from './DecafWebappController';
 import ZendeskWidget from './ZendeskWidget';
 
 export interface DecafAppConfig {
@@ -30,7 +30,7 @@ export default function DecafApp(props: DecafAppType) {
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
   const authInterval = React.useRef<NodeJS.Timer>();
-  const controller = props.controller || getDecafWebappController();
+  const controller = props.controller || DecafWebappController;
 
   function cleanUp() {
     setClient(undefined);
