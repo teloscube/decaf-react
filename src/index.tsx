@@ -3,7 +3,7 @@ import { useDecaf } from './context';
 import DecafApp from './DecafApp';
 import { DecafAppController } from './DecafAppController';
 import DecafSpinner from './DecafSpinner';
-import { DecafWebappController } from './DecafWebappController';
+import { getDecafWebappController } from './DecafWebappController';
 import ZendeskWidget from './ZendeskWidget';
 
 export {
@@ -12,6 +12,6 @@ export {
   useDecaf,
   ZendeskWidget,
   DecafAppController,
-  DecafWebappController,
+  getDecafWebappController,
   AbstractDecafNativeController,
 };
