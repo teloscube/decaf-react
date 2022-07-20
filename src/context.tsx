@@ -1,11 +1,12 @@
-import { buildDecafClient, DecafClient } from '@decafhub/decaf-client';
-import Cookies from 'js-cookie';
+import { DecafClient } from '@decafhub/decaf-client';
+import { DecafAppController } from './DecafAppController';
 import React, { useContext } from 'react';
 
 export const DecafContext = React.createContext<DecafContextType>({
   client: undefined as unknown as DecafClient,
   me: undefined as unknown as Principal,
   publicConfig: undefined as unknown as PublicConfig,
+  controller: undefined as unknown as DecafAppController,
 });
 
 export function DecafProvider({ children, value }: { children: JSX.Element; value: DecafContextType }) {
@@ -18,43 +19,13 @@ export const useDecaf = () => useContext(DecafContext);
 // INTERNAL DEFINITIONS //
 /// ///////////////////////
 
-export function getAuthenticationToken(): string | undefined {
-  // Attempt to get the cookie value:
-  const cookie = Cookies.get('ember_simple_auth-session');
-
-  // If no cookie, return nothing:
-  if (!cookie) {
-    return undefined;
-  }
-
-  try {
-    // Attempt to parse the cookie value:
-    const authinfo = JSON.parse(cookie);
-
-    // Get the token, if any:
-    const token: string | undefined = authinfo?.authenticated?.token;
-
-    // Done, return the token:
-    return token;
-  } catch {
-    console.error('Can not parse authentication information!');
-    return undefined;
-  }
-}
-
-export function getAuthenticatedDecafClient(): DecafClient | undefined {
-  // Attempt to get the authentication token:
-  const token = getAuthenticationToken();
-
-  // Check token, build client and return:
-  return token ? buildDecafClient('', { token }) : undefined;
-}
-
 export interface DecafContextType {
   client: DecafClient;
   me: Principal;
   publicConfig: PublicConfig;
+  controller: DecafAppController;
 }
+
 export interface Role {
   code: string;
   name: string;

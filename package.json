@@ -7,7 +7,7 @@
   ],
   "description": "A React library for Decaf Apps",
   "source": "src/index.tsx",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
   "types": "dist/index.d.ts",
@@ -39,9 +39,7 @@
     "react": ">=17",
     "react-dom": ">=17"
   },
-  "dependencies": {
-    "js-cookie": "^3.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",

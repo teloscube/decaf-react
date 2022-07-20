@@ -14,7 +14,7 @@ const ZENDESK_WIDGET_SCRIPT = 'https://static.zdassets.com/ekr/snippet.js';
 
 export default function ZendeskWidget(props: ZendeskWidgetProps) {
   useEffect(() => {
-    if (!props.zendeskKey) return;
+    if (!props.zendeskKey || typeof document === 'undefined') return;
     const script = document.createElement('script');
     script.src = ZENDESK_WIDGET_SCRIPT + '?key=' + props.zendeskKey;
     script.async = true;
