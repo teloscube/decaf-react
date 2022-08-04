@@ -24,19 +24,32 @@ export interface DecafAppType {
   controller?: DecafAppController;
 }
 
+export type RedirectReason = 'session-expired' | 'not-authenticated';
+
 export default function DecafApp(props: DecafAppType) {
   const [client, setClient] = React.useState<DecafClient | undefined>(undefined);
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
+  const [redirectReason, setRedirectReason] = React.useState<RedirectReason>('not-authenticated');
   const authInterval = React.useRef<NodeJS.Timer>();
   const controller = props.controller || DecafWebappController;
 
-  function cleanUp() {
+  function cleanUp(reason: RedirectReason) {
     setClient(undefined);
     setMe(undefined);
     setPublicConfig(undefined);
     setLoading(false);
+    setRedirectReason(reason);
+  }
+
+  function redirect(): null {
+    if (redirectReason === 'session-expired') {
+      return controller.onSessionExpired();
+    } else {
+      window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
+      return null;
+    }
   }
 
   useEffect(() => {
@@ -54,9 +67,11 @@ export default function DecafApp(props: DecafAppType) {
           setPublicConfig(configResp.data);
           setLoading(false);
         })
-        .catch(cleanUp);
+        .catch(() => {
+          cleanUp('session-expired');
+        });
     } else {
-      cleanUp();
+      cleanUp('not-authenticated');
     }
   }, [controller]);
 
@@ -70,7 +85,7 @@ export default function DecafApp(props: DecafAppType) {
         client.barista.get('/me/').catch(({ response }) => {
           // we are simply ignoring errors other than 401 and 403.
           if (response.status === 401 || response.status === 403) {
-            cleanUp();
+            cleanUp('session-expired');
           }
         });
       }, 1000 * 60);
@@ -84,7 +99,7 @@ export default function DecafApp(props: DecafAppType) {
   if (loading) {
     return <>{controller.loadingComponent}</>;
   } else if (client === undefined || me === undefined || publicConfig === undefined) {
-    return controller.onSessionExpired();
+    return redirect();
   } else {
     return (
       <DecafContext.Provider value={{ client, me, publicConfig, controller }}>
