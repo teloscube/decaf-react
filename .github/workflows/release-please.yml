@@ -12,6 +12,7 @@ jobs:
         id: release
         with:
           release-type: node
+          command: manifest
           package-name: release-please-action
 
       - uses: actions/checkout@v3
