@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.1](https://github.com/teloscube/decaf-react/compare/decaf-react-v0.1.0...decaf-react-v0.1.1) (2022-08-04)
+
+
+### Miscellaneous Chores
+
+* asdf ([8b39a53](https://github.com/teloscube/decaf-react/commit/8b39a537a6cba35e862822e839c9a6878118a7a8))
+
 ## [0.1.0](https://github.com/teloscube/decaf-react/compare/0.0.5...0.1.0) (2022-07-20)
 
 
