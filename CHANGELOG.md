@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.1](https://github.com/teloscube/decaf-react/compare/decaf-react-v0.1.0...decaf-react-v0.1.1) (2022-08-07)
+
+
+### Bug Fixes
+
+* login redirect reason is always session-expired ([5fac453](https://github.com/teloscube/decaf-react/commit/5fac45301712299729021a298f26f0de78fddb5f)), closes [#15](https://github.com/teloscube/decaf-react/issues/15)
+
 ## [0.1.0](https://github.com/teloscube/decaf-react/compare/0.0.5...0.1.0) (2022-07-20)
 
 
