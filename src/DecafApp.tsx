@@ -91,7 +91,6 @@ export default function DecafApp(props: DecafAppType) {
       }, 1000 * 60);
     }
     return () => {
-      // @ts-expect-error
       clearInterval(authInterval.current);
     };
   }, [client]);
