@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.2](https://github.com/teloscube/decaf-react/compare/0.1.1...0.1.2) (2022-11-07)
+
+
+### Miscellaneous Chores
+
+* release 0.1.2 ([4d61a48](https://github.com/teloscube/decaf-react/commit/4d61a48ea3cd991385dfba52f69b5890e69dcc75))
+
 ## [0.1.1](https://github.com/teloscube/decaf-react/compare/decaf-react-v0.1.0...decaf-react-v0.1.1) (2022-08-07)
 
 
