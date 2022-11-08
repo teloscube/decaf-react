@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.5](https://github.com/teloscube/decaf-react/compare/0.1.4...0.1.5) (2022-11-08)
+
+
+### Bug Fixes
+
+* add missing onInvalidSession to the AbstractNativeController ([752705f](https://github.com/teloscube/decaf-react/commit/752705fb0d90a27eebbe948b9c276c6bcb19186f))
+
 ## [0.1.4](https://github.com/teloscube/decaf-react/compare/0.1.3...0.1.4) (2022-11-08)
 
 
