@@ -1,6 +1,6 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import { ReactNode } from 'react';
-import { DecafAppController } from './DecafAppController';
+import { DecafAppController, RedirectReason } from './DecafAppController';
 
 export abstract class AbstractDecafNativeController implements DecafAppController {
   private client: DecafClient;
@@ -13,7 +13,7 @@ export abstract class AbstractDecafNativeController implements DecafAppControlle
     return this.client;
   }
 
-  abstract onSessionExpired(): null;
+  abstract onInvalidSession(reason: RedirectReason): null;
 
   abstract onLoadingState(loading: boolean): null;
 
