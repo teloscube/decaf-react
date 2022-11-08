@@ -50,8 +50,8 @@ export const DecafWebappController: DecafAppController = {
     return token ? buildDecafClient('', { token }) : undefined;
   },
 
-  onSessionExpired() {
-    window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=session-expired`;
+  onInvalidSession(reason) {
+    window.location.href = `/webapps/waitress/production/?next=${window.location.href}&reason=${reason}`;
     return null;
   },
 

@@ -1,7 +1,7 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import React, { ReactNode, useEffect } from 'react';
 import { DecafContext, Principal, PublicConfig } from './context';
-import { DecafAppController } from './DecafAppController';
+import { DecafAppController, RedirectReason } from './DecafAppController';
 import DecafVersionChecker from './DecafVersionChecker';
 import { DecafWebappController } from './DecafWebappController';
 import ZendeskWidget from './ZendeskWidget';
@@ -24,8 +24,6 @@ export interface DecafAppType {
   controller?: DecafAppController;
 }
 
-export type RedirectReason = 'session-expired' | 'not-authenticated';
-
 export default function DecafApp(props: DecafAppType) {
   const [client, setClient] = React.useState<DecafClient | undefined>(undefined);
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
@@ -41,15 +39,6 @@ export default function DecafApp(props: DecafAppType) {
     setPublicConfig(undefined);
     setLoading(false);
     setRedirectReason(reason);
-  }
-
-  function redirect(): null {
-    if (typeof window === 'undefined' || redirectReason === 'session-expired') {
-      return controller.onSessionExpired();
-    } else {
-      window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
-      return null;
-    }
   }
 
   useEffect(() => {
@@ -98,7 +87,7 @@ export default function DecafApp(props: DecafAppType) {
   if (loading) {
     return <>{controller.loadingComponent}</>;
   } else if (client === undefined || me === undefined || publicConfig === undefined) {
-    return redirect();
+    return controller.onInvalidSession(redirectReason);
   } else {
     return (
       <DecafContext.Provider value={{ client, me, publicConfig, controller }}>
