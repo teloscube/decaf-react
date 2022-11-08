@@ -44,7 +44,7 @@ export default function DecafApp(props: DecafAppType) {
   }
 
   function redirect(): null {
-    if (redirectReason === 'session-expired') {
+    if (typeof window === 'undefined' || redirectReason === 'session-expired') {
       return controller.onSessionExpired();
     } else {
       window.location.href = `/webapps/waitress/production/?next=${window.location.href}`;
