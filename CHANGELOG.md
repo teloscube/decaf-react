@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.3](https://github.com/teloscube/decaf-react/compare/0.1.2...0.1.3) (2022-11-08)
+
+
+### Bug Fixes
+
+* check if window is available before redirecting ([cc807e6](https://github.com/teloscube/decaf-react/commit/cc807e65e90bb60be63bc700ac866c5178bec6a1))
+
 ## [0.1.2](https://github.com/teloscube/decaf-react/compare/0.1.1...0.1.2) (2022-11-07)
 
 
