@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.4](https://github.com/teloscube/decaf-react/compare/0.1.3...0.1.4) (2022-11-08)
+
+
+### Bug Fixes
+
+* extract redirect logic from DecafApp to the controller ([0f95297](https://github.com/teloscube/decaf-react/commit/0f9529759ba33dcd5ba64201868bbffcd2a3e6c0))
+
 ## [0.1.3](https://github.com/teloscube/decaf-react/compare/0.1.2...0.1.3) (2022-11-08)
 
 
