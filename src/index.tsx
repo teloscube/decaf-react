@@ -1,4 +1,4 @@
-import { OfflineNotifier, useOnlineStatus } from 'OfflineChecker';
+import { OfflineNotifier, useOnlineStatus } from './OfflineChecker';
 import { AbstractDecafNativeController } from './AbstractDecafNativeController';
 import { useDecaf } from './context';
 import DecafApp from './DecafApp';
