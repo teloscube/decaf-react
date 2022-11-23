@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+/**
+ * A hook that returns the current online status of the browser.
+ * @returns `true` if the browser is online, `false` otherwise.
+ */
 export function useOnlineStatus(): boolean {
   const [online, setOnline] = useState<boolean>(navigator.onLine || true);
 
@@ -54,7 +58,11 @@ const styles = {
   },
 };
 
-export function OfflineChecker() {
+/**
+ * component to show notification when user is offline
+ * There will be a notification on the bottom right corner of the screen when user is offline
+ */
+export function OfflineNotifier() {
   const online = useOnlineStatus();
 
   if (online) {
