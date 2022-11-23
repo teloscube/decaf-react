@@ -51,7 +51,6 @@ const styles = {
   notification_wrapper_span: {
     color: 'white',
     fontWeight: 500,
-    fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
   },
   iconStyle: {
     fill: 'none',
