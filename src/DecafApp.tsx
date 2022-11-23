@@ -4,6 +4,7 @@ import { DecafContext, Principal, PublicConfig } from './context';
 import { DecafAppController, RedirectReason } from './DecafAppController';
 import DecafVersionChecker from './DecafVersionChecker';
 import { DecafWebappController } from './DecafWebappController';
+import { OfflineNotifier } from './OfflineChecker';
 import ZendeskWidget from './ZendeskWidget';
 
 export interface DecafAppConfig {
@@ -118,6 +119,7 @@ export default function DecafApp(props: DecafAppType) {
           />
         )}
         {props.children}
+        <OfflineNotifier />
       </DecafContext.Provider>
     );
   }
