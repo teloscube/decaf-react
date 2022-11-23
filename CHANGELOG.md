@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.6](https://github.com/teloscube/decaf-react/compare/0.1.5...0.1.6) (2022-11-23)
+
+
+### Features
+
+* indicate offline status at bottom-right ([f2accc1](https://github.com/teloscube/decaf-react/commit/f2accc13b15835eec92d4c66fc7f479a7a23683f)), closes [#26](https://github.com/teloscube/decaf-react/issues/26)
+
 ## [0.1.5](https://github.com/teloscube/decaf-react/compare/0.1.4...0.1.5) (2022-11-08)
 
 
