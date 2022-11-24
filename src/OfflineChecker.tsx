@@ -1,11 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+const DECAF_API_VERSION_PATH = '/api/version/';
 
 /**
  * A hook that returns the current online status of the browser.
  * @returns `true` if the browser is online, `false` otherwise.
  */
-export function useOnlineStatus(): boolean {
+export function useOnlineStatus(url: string, interval: number = 10000): boolean {
   const [online, setOnline] = useState<boolean>(navigator.onLine);
+  const pollInterval = useRef<number>();
+  const fetchTimeout = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    pollInterval.current = window.setInterval(() => {
+      const cacheSafeUrl = `${url}?t=${Date.now()}`;
+      const controller = new AbortController();
+
+      clearTimeout(fetchTimeout.current);
+
+      fetchTimeout.current = setTimeout(() => {
+        controller.abort();
+      }, 2500);
+
+      fetch(cacheSafeUrl, {
+        method: 'HEAD',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        signal: controller.signal,
+      })
+        .then(() => setOnline(true))
+        .catch(() => {
+          // The Promise returned from fetch() WON'T REJECT ON HTTP error status even if the response is an HTTP 404 or 500.
+          // Instead, it will resolve normally (with ok status set to false),
+          // and it will only reject on network failure or if anything prevented the request from completing.
+          setOnline(false);
+        });
+    }, interval);
+
+    return () => {
+      clearInterval(pollInterval.current);
+      clearTimeout(fetchTimeout.current);
+    };
+  }, [url, interval]);
 
   useEffect(() => {
     function goOnline() {
@@ -57,12 +93,15 @@ const styles = {
   },
 };
 
+export interface OfflineNotifierProps {
+  url?: string;
+}
 /**
  * component to show notification when user is offline
  * There will be a notification on the bottom right corner of the screen when user is offline
  */
-export function OfflineNotifier() {
-  const online = useOnlineStatus();
+export function OfflineNotifier({ url = DECAF_API_VERSION_PATH }: OfflineNotifierProps) {
+  const online = useOnlineStatus(url);
 
   if (online) {
     return null;
