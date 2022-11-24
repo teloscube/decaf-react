@@ -81,6 +81,7 @@ export interface DecafVersionCheckerProps {
   currentVersion: string;
   onNewVersion?: (versionOld: string, versionNew: string) => void;
   basePath?: string;
+  interval?: number;
 }
 
 export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
@@ -105,7 +106,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
         .catch(() => {
           console.error('DECAF Error: Can not fetch version information!');
         });
-    }, 1000 * 60);
+    }, (props.interval || 60) * 1000);
     return () => {
       clearInterval(interval.current);
     };

@@ -12,6 +12,8 @@ export interface DecafAppConfig {
   currentVersion?: string;
   /** callback when a new version is available */
   onNewVersion?: (versionOld: string, versionNew: string) => void;
+  /** interval (in seconds) to check for new version */
+  versionCheckInterval?: number;
   /** Base path of host app.
    *
    * This is usually PUBLIC_URL environment variable in React apps.
@@ -97,6 +99,7 @@ export default function DecafApp(props: DecafAppType) {
             basePath={props.config.basePath}
             currentVersion={props.config.currentVersion}
             onNewVersion={props.config.onNewVersion}
+            interval={props.config.versionCheckInterval}
           />
         )}
         {publicConfig.zendesk && (
