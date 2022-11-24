@@ -14,6 +14,8 @@ export interface DecafAppConfig {
   onNewVersion?: (versionOld: string, versionNew: string) => void;
   /** interval (in seconds) to check for new version */
   versionCheckInterval?: number;
+  /** interval (in seconds) to check auth status */
+  authCheckInterval?: number;
   /** Base path of host app.
    *
    * This is usually PUBLIC_URL environment variable in React apps.
@@ -80,12 +82,12 @@ export default function DecafApp(props: DecafAppType) {
             cleanUp('session-expired');
           }
         });
-      }, 1000 * 60);
+      }, (props.config?.authCheckInterval || 60) * 1000);
     }
     return () => {
       clearInterval(authInterval.current);
     };
-  }, [client]);
+  }, [client, props.config?.authCheckInterval]);
 
   if (loading) {
     return <>{controller.loadingComponent}</>;
