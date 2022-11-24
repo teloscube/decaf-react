@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [0.1.8](https://github.com/teloscube/decaf-react/compare/0.1.7...0.1.8) (2022-11-24)
+
+
+### Features
+
+* **auth-check:** allow configuring auth check interval ([595b5a9](https://github.com/teloscube/decaf-react/commit/595b5a91b4b895f396db55134731c68123babe76))
+* **version-check:** allow configuring version check interval ([29490fe](https://github.com/teloscube/decaf-react/commit/29490fe4cd2948f6bb5a5fbd6dfcbeab077efe1a))
+
+
+### Bug Fixes
+
+* export missing types ([a5147f5](https://github.com/teloscube/decaf-react/commit/a5147f533ee514b56769b8dc6f0193f043f3f17b))
+* **version-check:** set default value for base path ([15fa58a](https://github.com/teloscube/decaf-react/commit/15fa58ac4a7485d0bc672d2796a48eaddcd29c88))
+
 ## [0.1.7](https://github.com/teloscube/decaf-react/compare/0.1.6...0.1.7) (2022-11-24)
 
 
