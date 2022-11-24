@@ -23,13 +23,13 @@ export interface DecafAppConfig {
    * Required to enable version checker. */
   basePath?: string;
 }
-export interface DecafAppType {
+export interface DecafAppProps {
   children: ReactNode;
   config?: DecafAppConfig;
   controller?: DecafAppController;
 }
 
-export default function DecafApp(props: DecafAppType) {
+export default function DecafApp(props: DecafAppProps) {
   const [client, setClient] = React.useState<DecafClient | undefined>(undefined);
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
