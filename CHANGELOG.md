@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.7](https://github.com/teloscube/decaf-react/compare/0.1.6...0.1.7) (2022-11-24)
+
+
+### Bug Fixes
+
+* offline detection is not working healthy ([786a8bb](https://github.com/teloscube/decaf-react/commit/786a8bb1a4ff4aaa5f44adb61b1049f676eb6cdb)), closes [#29](https://github.com/teloscube/decaf-react/issues/29)
+
 ## [0.1.6](https://github.com/teloscube/decaf-react/compare/0.1.5...0.1.6) (2022-11-23)
 
 
