@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import { CUSTOMER_PUBLIC_CONFIG_PATH } from '../commons';
+
+const DECAF_API_VERSION_PATH = '/api/version/';
 
 /**
  * A hook that returns the current online status of the browser.
@@ -99,7 +100,7 @@ export interface OfflineNotifierProps {
  * component to show notification when user is offline
  * There will be a notification on the bottom right corner of the screen when user is offline
  */
-export function OfflineNotifier({ url = '/api/conf/public/' }: OfflineNotifierProps) {
+export function OfflineNotifier({ url = DECAF_API_VERSION_PATH }: OfflineNotifierProps) {
   const online = useOnlineStatus(url);
 
   if (online) {
