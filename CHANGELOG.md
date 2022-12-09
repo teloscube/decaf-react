@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.9](https://github.com/teloscube/decaf-react/compare/0.1.8...0.1.9) (2022-12-09)
+
+
+### Features
+
+* add props to disable offline-checker and zendesk widget ([ccf7422](https://github.com/teloscube/decaf-react/commit/ccf74226f435133f7650b626af612740459c8277))
+
 ## [0.1.8](https://github.com/teloscube/decaf-react/compare/0.1.7...0.1.8) (2022-11-24)
 
 
