@@ -8,4 +8,6 @@ export interface DecafAppController {
   onInvalidSession(reason: RedirectReason): null;
   onLoadingState(loading: boolean): null;
   loadingComponent: ReactNode;
+  disableZendeskWidget?: boolean;
+  isNodeApp?: boolean;
 }

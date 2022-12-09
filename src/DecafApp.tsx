@@ -104,7 +104,7 @@ export default function DecafApp(props: DecafAppProps) {
             interval={props.config.versionCheckInterval}
           />
         )}
-        {publicConfig.zendesk && (
+        {!controller.disableZendeskWidget && publicConfig.zendesk && (
           <ZendeskWidget
             zendeskKey={publicConfig.zendesk}
             settings={{
@@ -124,7 +124,7 @@ export default function DecafApp(props: DecafAppProps) {
           />
         )}
         {props.children}
-        <OfflineNotifier />
+        {!controller?.isNodeApp && <OfflineNotifier />}
       </DecafContext.Provider>
     );
   }
