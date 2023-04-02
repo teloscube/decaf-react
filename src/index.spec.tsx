@@ -1,24 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { DecafApp, DecafSpinner } from './';
 
 describe('<DecafApp />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(
+    const root = createRoot(div);
+    root.render(
       <DecafApp>
         <span>hello world</span>
-      </DecafApp>,
-      div
+      </DecafApp>
     );
-    ReactDOM.unmountComponentAtNode(div);
+    root.unmount();
   });
 });
 
 describe('<DecasSpinner />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<DecafSpinner />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const root = createRoot(div);
+    root.render(<DecafSpinner />);
+    root.unmount();
   });
 });
