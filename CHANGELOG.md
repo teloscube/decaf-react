@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.1.10](https://github.com/teloscube/decaf-react/compare/0.1.9...0.1.10) (2023-04-02)
+
+
+### Miscellaneous Chores
+
+* upgrade dependencies ([abeb1d3](https://github.com/teloscube/decaf-react/commit/abeb1d375ca9eae1bbe48ebad7c92b2c218fe427))
+
 ## [0.1.9](https://github.com/teloscube/decaf-react/compare/0.1.8...0.1.9) (2022-12-09)
 
 
