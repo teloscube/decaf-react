@@ -1,5 +1,5 @@
 import { AbstractDecafNativeController } from './AbstractDecafNativeController';
-import { useDecaf } from './context';
+import { DecafContextType, useDecaf } from './context';
 import DecafApp, { DecafAppConfig, DecafAppProps } from './DecafApp';
 import { DecafAppController } from './DecafAppController';
 import DecafSpinner from './DecafSpinner';
@@ -8,15 +8,16 @@ import { OfflineNotifier, useOnlineStatus } from './OfflineChecker';
 import ZendeskWidget from './ZendeskWidget';
 
 export {
+  AbstractDecafNativeController,
   DecafApp,
   DecafAppConfig,
-  DecafAppProps,
-  DecafSpinner,
-  useDecaf,
-  ZendeskWidget,
   DecafAppController,
+  DecafAppProps,
+  DecafContextType,
+  DecafSpinner,
   DecafWebappController,
-  AbstractDecafNativeController,
   OfflineNotifier,
+  useDecaf,
   useOnlineStatus,
+  ZendeskWidget,
 };
