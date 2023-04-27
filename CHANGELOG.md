@@ -1,6 +1,22 @@
 # Changelog
 
 
+## [0.2.0](https://github.com/teloscube/decaf-react/compare/0.1.10...0.2.0) (2023-04-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* set minimum supported react version to 18
+
+### Features
+
+* export DecafContextType ([47e7e6d](https://github.com/teloscube/decaf-react/commit/47e7e6d6f209e6a5e4c3e956d9b7ee0ec92f8564))
+
+
+### Miscellaneous Chores
+
+* set minimum supported react version to 18 ([a39ede5](https://github.com/teloscube/decaf-react/commit/a39ede57e33751f517cc8a703cd902f3fcf7aa04))
+
 ## [0.1.10](https://github.com/teloscube/decaf-react/compare/0.1.9...0.1.10) (2023-04-02)
 
 
