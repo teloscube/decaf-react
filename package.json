@@ -30,7 +30,7 @@
     "prepare": "yarn build && husky install"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "peerDependencies": {
     "@decafhub/decaf-client": "^0.3.2",
