@@ -1,6 +1,22 @@
 # Changelog
 
 
+## [0.3.0](https://github.com/teloscube/decaf-react/compare/0.2.0...0.3.0) (2023-05-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* make minimum supported node version 16
+
+### Bug Fixes
+
+* coloring is broken on version checker modal ([e660e6b](https://github.com/teloscube/decaf-react/commit/e660e6b18f4b706e3f4013437d6231bf0f946f76))
+
+
+### Miscellaneous Chores
+
+* make minimum supported node version 16 ([b91464d](https://github.com/teloscube/decaf-react/commit/b91464d94e8ee5ab52fb6caab0d35e935a66a3a9))
+
 ## [0.2.0](https://github.com/teloscube/decaf-react/compare/0.1.10...0.2.0) (2023-04-27)
 
 
