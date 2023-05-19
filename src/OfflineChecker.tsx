@@ -67,18 +67,19 @@ export function useOnlineStatus(url: string, interval: number = 10000): boolean 
 const styles = {
   notification_wrapper: {
     position: 'fixed',
-    bottom: 20,
+    bottom: 40,
     right: 10,
     transition: '0.3s ease-in',
-    backgroundColor: '#1e2d3d',
+    backgroundColor: '#ff4d4f',
     borderRadius: 6,
-    padding: '10px 20px',
+    padding: 20,
     height: 32,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '3px 3px 5px 0px rgba(0, 0, 0, 0.5)',
+    boxShadow: '0 2px 0 rgba(255,38,5,.06)',
     transform: 'translatey(10%)',
+    zIndex: 9999,
   },
   notification_wrapper_svg: {
     marginRight: '5px',
