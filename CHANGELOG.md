@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.3.1](https://github.com/teloscube/decaf-react/compare/0.3.0...0.3.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* decaf footer overlaps offline checker ([e3e8fbe](https://github.com/teloscube/decaf-react/commit/e3e8fbe6f32fd2159ed6718c39edea47181860ea))
+
 ## [0.3.0](https://github.com/teloscube/decaf-react/compare/0.2.0...0.3.0) (2023-05-19)
 
 
