@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const style = `
 .version-modal {
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,6 +22,7 @@ const style = `
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .version-modal-title h2 {
@@ -37,10 +39,12 @@ const style = `
   width: 50%;
   background-color: #333;
   border-radius: 5px;
+  color: white;
 }
 
 .version-modal .version-modal-content {
   padding: 5px 20px;
+  color: white;
 }
 
 .version-modal .version-modal-footer {
@@ -146,7 +150,7 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
             </div>
             <div className="version-modal-footer">
               <button className="cancel-btn" onClick={() => setNewVersion(undefined)}>
-                Let me finish my work first. I will reload later.
+                I will reload later
               </button>
               <button
                 className="reload-btn"
