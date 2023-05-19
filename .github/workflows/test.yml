@@ -17,13 +17,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
         env:
           DECAF_JS_SKIP_POSTINSTALL: 1
           HUSKY: 0
 
       - name: Run Tests
-        run: yarn test --ci
+        run: npm test -- --ci

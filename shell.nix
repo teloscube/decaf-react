@@ -6,7 +6,6 @@ stdenv.mkDerivation {
   buildInputs = with pkgs; [
     git
     nodejs # always LTS
-    yarn
 
     figlet
     lolcat

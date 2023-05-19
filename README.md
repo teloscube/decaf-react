@@ -12,12 +12,6 @@ Install @decafhub/decaf-react along with its peer dependency @decafhub/decaf-cli
 npm install --save @decafhub/decaf-react @decafhub/decaf-client
 ```
 
-Or with yarn:
-
-```bash
-yarn add @decafhub/decaf-react @decafhub/decaf-client
-```
-
 ## Usage
 
 ## API / Props
