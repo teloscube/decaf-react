@@ -1,11 +1,11 @@
 import { DecafClient } from '@decafhub/decaf-client';
 import React, { ReactNode, useEffect } from 'react';
-import { DecafContext, Principal, PublicConfig } from './context';
 import { DecafAppController, RedirectReason } from './DecafAppController';
 import DecafVersionChecker from './DecafVersionChecker';
 import { DecafWebappController } from './DecafWebappController';
 import { OfflineNotifier } from './OfflineChecker';
 import ZendeskWidget from './ZendeskWidget';
+import { DecafContext, Principal, PublicConfig } from './context';
 
 export interface DecafAppConfig {
   /** version of the application */
@@ -35,7 +35,7 @@ export default function DecafApp(props: DecafAppProps) {
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
   const [redirectReason, setRedirectReason] = React.useState<RedirectReason>('not-authenticated');
-  const authInterval = React.useRef<NodeJS.Timer>();
+  const authInterval = React.useRef<NodeJS.Timeout | undefined>(undefined);
   const controller = props.controller || DecafWebappController;
 
   function cleanUp(reason: RedirectReason) {
@@ -75,14 +75,17 @@ export default function DecafApp(props: DecafAppProps) {
     // we already know client and me are set.
     // We just need to check if the credentials are still valid.
     if (client) {
-      authInterval.current = setInterval(() => {
-        client.barista.get('/me/').catch(({ response }) => {
-          // we are simply ignoring errors other than 401 and 403.
-          if (response.status === 401 || response.status === 403) {
-            cleanUp('session-expired');
-          }
-        });
-      }, (props.config?.authCheckInterval || 60) * 1000);
+      authInterval.current = setInterval(
+        () => {
+          client.barista.get('/me/').catch(({ response }) => {
+            // we are simply ignoring errors other than 401 and 403.
+            if (response.status === 401 || response.status === 403) {
+              cleanUp('session-expired');
+            }
+          });
+        },
+        (props.config?.authCheckInterval || 60) * 1000
+      );
     }
     return () => {
       clearInterval(authInterval.current);
