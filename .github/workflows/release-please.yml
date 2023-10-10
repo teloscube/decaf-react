@@ -12,6 +12,7 @@ jobs:
         id: release
         with:
           command: manifest
+          release-type: node
 
       - uses: actions/checkout@v3
         if: ${{ steps.release.outputs.release_created }}
