@@ -1,4 +1,4 @@
-with import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/22.11.tar.gz") {};
+with import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/23.05.tar.gz") {};
 
 stdenv.mkDerivation {
   name = "decaf-react";
