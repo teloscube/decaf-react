@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [0.4.0](https://github.com/teloscube/decaf-react/compare/0.3.1...0.4.0) (2023-12-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Node version 16
+
+### Miscellaneous Chores
+
+* drop support for Node version 16 ([648c0d4](https://github.com/teloscube/decaf-react/commit/648c0d43960d8499aba3c1e60121012f16fb7ce7))
+
 ## [0.3.1](https://github.com/teloscube/decaf-react/compare/0.3.0...0.3.1) (2023-05-19)
 
 
