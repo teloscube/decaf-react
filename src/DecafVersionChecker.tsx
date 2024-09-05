@@ -96,21 +96,24 @@ export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
     if (interval.current) {
       clearInterval(interval.current);
     }
-    interval.current = window.setInterval(() => {
-      fetch((props.basePath ?? '') + '/version.json?t=' + new Date().getTime())
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.version) {
-            setNewVersion(data.version);
-            if (props.currentVersion !== data.version) {
-              props.onNewVersion?.(props.currentVersion, data.version);
+    interval.current = window.setInterval(
+      () => {
+        fetch((props.basePath ?? '') + '/version.json?t=' + new Date().getTime())
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.version) {
+              setNewVersion(data.version);
+              if (props.currentVersion !== data.version) {
+                props.onNewVersion?.(props.currentVersion, data.version);
+              }
             }
-          }
-        })
-        .catch(() => {
-          console.error('DECAF Error: Can not fetch version information!');
-        });
-    }, (props.interval || 60) * 1000);
+          })
+          .catch(() => {
+            console.error('DECAF Error: Can not fetch version information!');
+          });
+      },
+      (props.interval || 60) * 1000
+    );
     return () => {
       clearInterval(interval.current);
     };
