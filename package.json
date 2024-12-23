@@ -30,7 +30,7 @@
     "prepare": "npm run build && husky"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "peerDependencies": {
     "@decafhub/decaf-client": "^0.5",
