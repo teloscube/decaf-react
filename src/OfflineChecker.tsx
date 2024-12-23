@@ -8,8 +8,8 @@ const DECAF_API_VERSION_PATH = '/api/version/';
  */
 export function useOnlineStatus(url: string, interval: number = 10000): boolean {
   const [online, setOnline] = useState<boolean>(navigator.onLine);
-  const pollInterval = useRef<number>();
-  const fetchTimeout = useRef<NodeJS.Timeout>();
+  const pollInterval = useRef<number>(undefined);
+  const fetchTimeout = useRef<NodeJS.Timeout>(undefined);
 
   useEffect(() => {
     pollInterval.current = window.setInterval(() => {
