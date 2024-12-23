@@ -90,7 +90,7 @@ export interface DecafVersionCheckerProps {
 
 export default function DecafVersionChecker(props: DecafVersionCheckerProps) {
   const [newVersion, setNewVersion] = useState();
-  const interval = useRef<number>();
+  const interval = useRef<number>(undefined);
 
   useEffect(() => {
     if (interval.current) {

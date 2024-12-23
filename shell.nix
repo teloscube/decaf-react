@@ -4,7 +4,7 @@ stdenv.mkDerivation {
   name = "decaf-react";
 
   buildInputs = with pkgs; [
-    nodejs_18
+    nodejs_20
 
     figlet
     lolcat
