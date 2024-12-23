@@ -1,6 +1,22 @@
 # Changelog
 
 
+## [0.6.0](https://github.com/teloscube/decaf-react/compare/0.5.0...0.6.0) (2024-12-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 20
+
+### Features
+
+* upgrade dependencies and migrate to React 19 ([42342f9](https://github.com/teloscube/decaf-react/commit/42342f922075137d2be483c54c32232e9b530105))
+
+
+### Miscellaneous Chores
+
+* upgrade to Node 20 ([66d048b](https://github.com/teloscube/decaf-react/commit/66d048b191f1cf6b66a9256393fa565ff2e0a8f9))
+
 ## [0.5.0](https://github.com/teloscube/decaf-react/compare/0.4.0...0.5.0) (2024-09-05)
 
 
