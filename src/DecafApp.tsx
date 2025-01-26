@@ -5,7 +5,7 @@ import DecafVersionChecker from './DecafVersionChecker';
 import { DecafWebappController } from './DecafWebappController';
 import { OfflineNotifier } from './OfflineChecker';
 import ZendeskWidget from './ZendeskWidget';
-import { DecafContext, Principal, PublicConfig } from './context';
+import { DecafContext, Principal, PrivateConfig, PublicConfig } from './context';
 
 export interface DecafAppConfig {
   /** version of the application */
@@ -33,6 +33,7 @@ export default function DecafApp(props: DecafAppProps) {
   const [client, setClient] = React.useState<DecafClient | undefined>(undefined);
   const [me, setMe] = React.useState<Principal | undefined>(undefined);
   const [publicConfig, setPublicConfig] = React.useState<PublicConfig | undefined>(undefined);
+  const [privateConfig, setPrivateConfig] = React.useState<PrivateConfig | undefined>(undefined);
   const [loading, setLoading] = React.useState(true);
   const [redirectReason, setRedirectReason] = React.useState<RedirectReason>('not-authenticated');
   const authInterval = React.useRef<NodeJS.Timeout | undefined>(undefined);
@@ -54,11 +55,16 @@ export default function DecafApp(props: DecafAppProps) {
     const client = controller.getDecafClient();
 
     if (client) {
-      Promise.all([client.barista.get('/me/'), client.barista.get('/conf/public/')])
-        .then(([meResp, configResp]) => {
+      Promise.all([
+        client.barista.get('/me/'),
+        client.barista.get('/conf/public/'),
+        client.barista.get('/conf/private/'),
+      ])
+        .then(([meResp, configResp, privateConfig]) => {
           setClient(client);
           setMe(meResp.data);
           setPublicConfig(configResp.data);
+          setPrivateConfig(privateConfig.data);
           setLoading(false);
         })
         .catch(() => {
@@ -94,11 +100,11 @@ export default function DecafApp(props: DecafAppProps) {
 
   if (loading) {
     return <>{controller.loadingComponent}</>;
-  } else if (client === undefined || me === undefined || publicConfig === undefined) {
+  } else if (client === undefined || me === undefined || publicConfig === undefined || privateConfig === undefined) {
     return controller.onInvalidSession(redirectReason);
   } else {
     return (
-      <DecafContext.Provider value={{ client, me, publicConfig, controller }}>
+      <DecafContext.Provider value={{ client, me, publicConfig, privateConfig, controller }}>
         {props.config?.currentVersion && (
           <DecafVersionChecker
             basePath={props.config.basePath}
