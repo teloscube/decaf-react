@@ -6,6 +6,7 @@ export const DecafContext = React.createContext<DecafContextType>({
   client: undefined as unknown as DecafClient,
   me: undefined as unknown as Principal,
   publicConfig: undefined as unknown as PublicConfig,
+  privateConfig: undefined as unknown as PrivateConfig,
   controller: undefined as unknown as DecafAppController,
 });
 
@@ -23,6 +24,7 @@ export interface DecafContextType {
   client: DecafClient;
   me: Principal;
   publicConfig: PublicConfig;
+  privateConfig: PrivateConfig;
   controller: DecafAppController;
 }
 
@@ -72,4 +74,33 @@ export interface PublicConfig {
   otp: null;
   /** password reset feature should be enabled or not */
   pwdreset: true;
+}
+
+/**
+ * Type encoding for global private deployment configuration.
+ *
+ * This configuration value is instantiated during runtime from
+ * `/api/conf/private/` API endpoint.
+ */
+export interface PrivateConfig {
+  functions: {
+    portmngt: boolean;
+    fundmngt: boolean;
+    ebanking: boolean;
+    pretrade: boolean;
+  };
+  beanbag?: string;
+  releasenotes: string;
+  documentation: Resource[];
+}
+
+/**
+ * Type encoding for a single documentation item.
+ */
+export interface Resource {
+  title: string;
+  description: string;
+  role: 'privileged' | 'internal' | '*';
+  authed: boolean;
+  document: { type: 'internal' | 'external'; link: string };
 }
