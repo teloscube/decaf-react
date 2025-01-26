@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.6.2](https://github.com/teloscube/decaf-react/compare/0.6.1...0.6.2) (2025-01-26)
+
+
+### Features
+
+* **context:** add private configuration support ([a6f9bc0](https://github.com/teloscube/decaf-react/commit/a6f9bc06c20cde9ea7e1144dc9035f55f34f8fc4))
+
 ## [0.6.1](https://github.com/teloscube/decaf-react/compare/0.6.0...0.6.1) (2024-12-31)
 
 
