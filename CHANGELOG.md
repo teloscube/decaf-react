@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.7.0](https://github.com/teloscube/decaf-react/compare/0.6.2...0.7.0) (2025-04-28)
+
+
+### Miscellaneous Chores
+
+* upgrade dependencies ([33d2c35](https://github.com/teloscube/decaf-react/commit/33d2c351b84fd1e6815802e938510d60ba0bd7f6))
+
 ## [0.6.2](https://github.com/teloscube/decaf-react/compare/0.6.1...0.6.2) (2025-01-26)
 
 
