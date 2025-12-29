@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [0.8.0](https://github.com/teloscube/decaf-react/compare/0.7.0...0.8.0) (2025-12-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop support for Node 20
+
+### Miscellaneous Chores
+
+* upgrade node version to 24 ([abdc799](https://github.com/teloscube/decaf-react/commit/abdc799590298af99d060f8dfae0cae961a6ac8e))
+
 ## [0.7.0](https://github.com/teloscube/decaf-react/compare/0.6.2...0.7.0) (2025-04-28)
 
 
