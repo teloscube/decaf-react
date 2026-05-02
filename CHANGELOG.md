@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [0.8.1](https://github.com/teloscube/decaf-react/compare/0.8.0...0.8.1) (2026-05-02)
+
+
+### Features
+
+* **offline-checker:** distinguish slow connections from offline ([f0af87d](https://github.com/teloscube/decaf-react/commit/f0af87d7e4fd4db1188f02cf31e7208ec7316083)), closes [#55](https://github.com/teloscube/decaf-react/issues/55)
+
+
+### Bug Fixes
+
+* **offline-checker:** address copilot review findings ([6272259](https://github.com/teloscube/decaf-react/commit/62722590e34bcb472b95456371a560094daf6424))
+
 ## [0.8.0](https://github.com/teloscube/decaf-react/compare/0.7.0...0.8.0) (2025-12-29)
 
 
