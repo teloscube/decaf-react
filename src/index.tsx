@@ -4,11 +4,19 @@ import DecafApp, { DecafAppConfig, DecafAppProps } from './DecafApp';
 import { DecafAppController } from './DecafAppController';
 import DecafSpinner from './DecafSpinner';
 import { DecafWebappController } from './DecafWebappController';
-import { OfflineNotifier, useOnlineStatus } from './OfflineChecker';
+import {
+  ConnectionStatus,
+  OfflineNotifier,
+  OfflineNotifierProps,
+  UseConnectionStatusOptions,
+  useConnectionStatus,
+  useOnlineStatus,
+} from './OfflineChecker';
 import ZendeskWidget from './ZendeskWidget';
 
 export {
   AbstractDecafNativeController,
+  ConnectionStatus,
   DecafApp,
   DecafAppConfig,
   DecafAppController,
@@ -17,7 +25,10 @@ export {
   DecafSpinner,
   DecafWebappController,
   OfflineNotifier,
+  OfflineNotifierProps,
+  UseConnectionStatusOptions,
+  ZendeskWidget,
+  useConnectionStatus,
   useDecaf,
   useOnlineStatus,
-  ZendeskWidget,
 };
