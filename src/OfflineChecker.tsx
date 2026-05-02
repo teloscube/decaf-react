@@ -39,10 +39,13 @@ const DEFAULTS: Required<UseConnectionStatusOptions> = {
  *  - Polling pauses while the tab is hidden to avoid accumulating failures from a throttled tab.
  */
 export function useConnectionStatus(url: string, options: UseConnectionStatusOptions = {}): ConnectionStatus {
-  const { interval, slowThreshold, hardTimeout, offlineAfter, slowAfter } = {
-    ...DEFAULTS,
-    ...options,
-  };
+  // Use nullish coalescing per field: `{...DEFAULTS, ...options}` would let an explicit `undefined`
+  // (common when callers spread optional props through) overwrite a default and break timers.
+  const interval = options.interval ?? DEFAULTS.interval;
+  const slowThreshold = options.slowThreshold ?? DEFAULTS.slowThreshold;
+  const hardTimeout = options.hardTimeout ?? DEFAULTS.hardTimeout;
+  const offlineAfter = options.offlineAfter ?? DEFAULTS.offlineAfter;
+  const slowAfter = options.slowAfter ?? DEFAULTS.slowAfter;
 
   const [status, setStatus] = useState<ConnectionStatus>(() =>
     typeof navigator !== 'undefined' && navigator.onLine === false ? 'offline' : 'online'
@@ -54,9 +57,17 @@ export function useConnectionStatus(url: string, options: UseConnectionStatusOpt
 
   useEffect(() => {
     let cancelled = false;
+    let nextTimer: ReturnType<typeof setTimeout> | undefined;
 
+    // Probes are chained (next one scheduled when the previous settles) instead of running
+    // on a fixed interval. With a 12s hardTimeout and 10s interval, setInterval would let
+    // probes overlap and complete out-of-order, corrupting slowCount/errorCount.
     const runProbe = () => {
-      if (document.visibilityState === 'hidden') return;
+      if (cancelled) return;
+      if (document.visibilityState === 'hidden') {
+        nextTimer = setTimeout(runProbe, interval);
+        return;
+      }
 
       const controller = new AbortController();
       const startedAt = Date.now();
@@ -72,10 +83,11 @@ export function useConnectionStatus(url: string, options: UseConnectionStatusOpt
           if (cancelled) return;
           const elapsed = Date.now() - startedAt;
           if (elapsed > slowThreshold) {
+            // The probe actually resolved, so we know we're reachable — clear offline if set.
             errorCount.current = 0;
             slowCount.current += 1;
             if (slowCount.current >= slowAfter) {
-              setStatus((prev) => (prev === 'offline' ? prev : 'slow'));
+              setStatus('slow');
             }
           } else {
             slowCount.current = 0;
@@ -87,7 +99,8 @@ export function useConnectionStatus(url: string, options: UseConnectionStatusOpt
           if (cancelled) return;
           const isAbort = err instanceof DOMException && err.name === 'AbortError';
           if (isAbort) {
-            // Aborted by our hard timeout: treat as slow, never as offline.
+            // Aborted by our hard timeout: treat as slow, never as offline. We do NOT
+            // downgrade an existing offline state here — an abort doesn't prove reachability.
             errorCount.current = 0;
             slowCount.current += 1;
             if (slowCount.current >= slowAfter) {
@@ -103,14 +116,15 @@ export function useConnectionStatus(url: string, options: UseConnectionStatusOpt
         })
         .finally(() => {
           clearTimeout(abortTimer);
+          if (!cancelled) nextTimer = setTimeout(runProbe, interval);
         });
     };
 
-    const timer = setInterval(runProbe, interval);
+    nextTimer = setTimeout(runProbe, interval);
 
     return () => {
       cancelled = true;
-      clearInterval(timer);
+      if (nextTimer) clearTimeout(nextTimer);
     };
   }, [url, interval, slowThreshold, hardTimeout, offlineAfter, slowAfter]);
 
